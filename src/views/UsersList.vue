@@ -38,6 +38,4 @@ export default {
 .user-list {
   padding: 0;
 }
-.ant-list-item {
-}
 </style>
