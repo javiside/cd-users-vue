@@ -25,10 +25,10 @@ export default {
   },
   async created() {
     this.fetchedUserInfo = await fetchData(
-      `http://jsonplaceholder.typicode.com/users/${this.$route.params.id}`
+      `https://jsonplaceholder.typicode.com/users/${this.$route.params.id}`
     );
     this.fetchedUserPosts = await fetchData(
-      `http://jsonplaceholder.typicode.com/posts?userId=${this.$route.params.id}`
+      `https://jsonplaceholder.typicode.com/posts?userId=${this.$route.params.id}`
     );
   },
   watch: {

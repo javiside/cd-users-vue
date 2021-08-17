@@ -16,7 +16,7 @@ export default {
   },
   async created() {
     this.fetchedUsers = await fetchData(
-      "http://jsonplaceholder.typicode.com/users"
+      "https://jsonplaceholder.typicode.com/users"
     );
     this.sortVal = "name";
     this.emitter.on("filter-users", (searchVal) => {
