@@ -13,13 +13,13 @@
       <a-input
         v-model:value="inputValue"
         placeholder="Search by name, username or email"
-        @input="this.$emit('onFilter', $event.target.value)"
+        @input="emitter.emit('filter-users', $event.target.value)"
       />
 
       <a-select
         ref="select"
         v-model:value="selectValue"
-        @change="this.$emit('onSort', $event)"
+        @change="emitter.emit('sort-users', $event)"
       >
         <a-select-option value="name">Name</a-select-option>
         <a-select-option value="username">UserName</a-select-option>
@@ -29,7 +29,18 @@
   </nav>
 </template>
 <script>
+import { Breadcrumb, Select, Input } from "ant-design-vue";
+const { Item } = Breadcrumb;
+const { Option } = Select;
+
 export default {
+  components: {
+    "a-breadcrumb": Breadcrumb,
+    "a-breadcrumb-item": Item,
+    "a-select": Select,
+    "a-select-option": Option,
+    "a-input": Input,
+  },
   props: ["user-name"],
   data() {
     return {
@@ -41,9 +52,12 @@ export default {
 };
 </script>
 <style lang="less">
+@import "../styles/global.less";
+
 .nav {
-  display: flex;
   position: static;
+  display: flex;
+  flex-flow: column;
   flex-grow: 1;
   flex-shrink: 0;
   align-items: center;
@@ -60,8 +74,9 @@ export default {
 
   .nav-actions {
     display: flex;
-    justify-content: space-between;
+    flex-flow: column;
     flex-grow: 1;
+    align-items: center;
   }
   .ant-breadcrumb {
     flex-grow: 8;
@@ -77,13 +92,38 @@ export default {
     }
   }
   .ant-input {
-    width: auto;
-    flex-grow: 8;
-    margin-right: 10px;
+    background-color: #5060be;
+    border-color: #152061;
+    color: white;
   }
   .ant-select {
-    width: auto;
-    flex-grow: 2;
+    width: 100%;
+
+    .ant-select-selector {
+      background-color: #374591;
+      border-color: #152061;
+      color: white;
+    }
   }
+
+  .md({ 
+    flex-flow: row;
+
+    .nav-actions {
+    flex-flow: row;
+    justify-content: space-between;
+
+    .ant-input {
+    flex-grow: 8;
+    width: auto;
+    margin-right: 10px;
+
+    }
+    .ant-select {
+      width: auto;
+      flex-grow: 2;
+    }
+  }
+  });
 }
 </style>

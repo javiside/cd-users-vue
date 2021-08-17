@@ -1,17 +1,24 @@
 <template>
-  <app-header :user-name="userName" />
-  <card :info="cardUserInfo" :posts="cardUserPosts" />
+  <card :info="cardUserInfo" />
+  <h2>Posts by {{ userName }}</h2>
+  <carousel :info="cardUserPosts" />
 </template>
 
 <script>
 import fetchData from "../services/FetchData";
+import Card from "../components/Card.vue";
+import Carousel from "../components/Carousel.vue";
 
 export default {
+  components: {
+    card: Card,
+    carousel: Carousel,
+  },
   data() {
     return {
-      fetchedUserInfo: null,
-      fetchedUserPosts: null,
-      cardUserInfo: [],
+      fetchedUserInfo: {},
+      fetchedUserPosts: [],
+      cardUserInfo: {},
       cardUserPosts: [],
       userName: "",
     };
@@ -26,33 +33,32 @@ export default {
   },
   watch: {
     fetchedUserInfo(user) {
+      this.emitter.emit("set-user-name", user.name);
       this.userName = user.name;
-      this.cardUserInfo = [
-        {
-          id: "Contact Info",
+
+      this.cardUserInfo = {
+        "Contact Info": {
           Username: user.username,
           Email: user.email,
           Phone: user.phone,
           Website: user.website,
+          showLabels: true,
         },
-        {
-          id: "Address",
+        Address: {
           address: `${user.address.suite} ${user.address.street}, ${user.address.city}, ${user.address.zipcode}`,
-          hideLabels: true,
         },
-        {
-          id: "Company",
+        Company: {
           cn: user.company.name,
           bs: user.company.bs,
           cp: user.company.catchPhrase,
-          hideLabels: true,
         },
-      ];
+      };
     },
     fetchedUserPosts(posts) {
-      this.cardUserPosts = posts.map((post) => ({
-        title: post.title,
-        body: post.body,
+      this.cardUserPosts = posts.map((el) => ({
+        id: el.id,
+        title: el.title,
+        body: el.body,
       }));
     },
   },

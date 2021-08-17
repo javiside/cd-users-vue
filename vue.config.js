@@ -3,7 +3,7 @@ module.exports = {
     loaderOptions: {
       less: {
         modifyVars: {
-          "@input-placeholder-color": "#728db8",
+          "@input-placeholder-color": "#a5a5e0",
         },
         javascriptEnabled: true,
       },

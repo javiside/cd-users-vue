@@ -11,12 +11,21 @@
     <template #actions>
       <a @click.stop :href="`mailto:${user.email}`">{{ user.email }}</a>
     </template>
-    <template #extra> <hr /> </template>
   </a-list-item>
 </template>
 
 <script>
+import { List, Avatar } from "ant-design-vue";
+const {
+  Item: { Meta },
+  Item,
+} = List;
 export default {
+  components: {
+    "a-list-item": Item,
+    "a-list-item-meta": Meta,
+    "a-avatar": Avatar,
+  },
   props: ["userData"],
   data() {
     return {
@@ -26,7 +35,11 @@ export default {
 };
 </script>
 <style lang="less">
+@import "../styles/global.less";
+
 .ant-list-item {
+  display: flex;
+  flex-flow: column;
   text-align: left;
   cursor: pointer;
   transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
@@ -39,8 +52,39 @@ export default {
     background-color: #6d7cd1;
   }
 
+  &-meta {
+    align-items: center;
+
+    .ant-avatar-circle {
+      height: 64px;
+      width: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+  }
+
   h4 {
     cursor: pointer;
   }
+
+  hr {
+    display: none;
+  }
+
+  .md({
+    flex-flow: row;
+
+    .ant-avatar-circle {
+      height: 32px;
+      width: 32px;
+      font-size: 1rem;
+    }
+
+    hr {
+      display: block;
+    }
+  });
 }
 </style>
