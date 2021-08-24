@@ -36,6 +36,7 @@ export default {
   },
 };
 </script>
+
 <style lang="less">
 .ant-carousel {
   padding: 20px;

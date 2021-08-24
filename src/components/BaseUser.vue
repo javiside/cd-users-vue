@@ -34,6 +34,7 @@ export default {
   },
 };
 </script>
+
 <style lang="less">
 @import "../styles/global.less";
 
@@ -63,14 +64,10 @@ export default {
       justify-content: center;
       font-size: 2rem;
     }
-  }
 
-  h4 {
-    cursor: pointer;
-  }
-
-  hr {
-    display: none;
+    &-title {
+      cursor: pointer;
+    }
   }
 
   .md({

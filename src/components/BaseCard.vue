@@ -115,9 +115,6 @@ export default {
       & strong {
         text-align: center;
       }
-      & div {
-        // flex-grow: 1;
-      }
     }
   });
 }
