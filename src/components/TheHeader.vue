@@ -13,14 +13,9 @@
       <a-input
         v-model:value="inputValue"
         placeholder="Search by name, username or email"
-        @input="emitter.emit('filter-users', $event.target.value)"
       />
 
-      <a-select
-        ref="select"
-        v-model:value="selectValue"
-        @change="emitter.emit('sort-users', $event)"
-      >
+      <a-select ref="select" v-model:value="selectValue">
         <a-select-option value="name">Name</a-select-option>
         <a-select-option value="username">UserName</a-select-option>
         <a-select-option value="email">Email</a-select-option>
@@ -41,13 +36,28 @@ export default {
     "a-select-option": Option,
     "a-input": Input,
   },
-  props: ["user-name"],
   data() {
     return {
-      user: this["user-name"],
       inputValue: "",
       selectValue: "name",
     };
+  },
+  computed: {
+    userName() {
+      return this.$store.getters.currentUserName;
+    },
+  },
+  watch: {
+    inputValue(searchVal) {
+      this.$store.dispatch({ type: "filterUsers", searchVal });
+      this.$store.dispatch({ type: "sortUsers", selected: this.selectValue });
+    },
+    selectValue(selected) {
+      this.$store.dispatch({ type: "sortUsers", selected });
+    },
+    "$route.params.id"(id) {
+      this.$store.dispatch({ type: "setCurrentId", id });
+    },
   },
 };
 </script>

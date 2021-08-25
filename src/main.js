@@ -1,16 +1,14 @@
 import { createApp } from "vue";
 import { Alert, Skeleton } from "ant-design-vue";
 
-import mitt from "mitt";
-
 import App from "./App.vue";
 import router from "./router";
+import store from "./store/index";
 
-const emitter = mitt();
 const app = createApp(App);
 
-app.config.globalProperties.emitter = emitter;
 app.use(router);
+app.use(store);
 app.use(Alert);
 app.use(Skeleton);
 app.mount("#app");

@@ -5,7 +5,7 @@
         <strong>{{ user.name }}</strong>
       </template>
       <template #avatar>
-        <a-avatar>{{ user.name[0] }}</a-avatar>
+        <a-avatar :src="avatars?.[user.id - 1]">{{ user.name[0] }}</a-avatar>
       </template>
     </a-list-item-meta>
     <template #actions>
@@ -26,7 +26,7 @@ export default {
     "a-list-item-meta": Meta,
     "a-avatar": Avatar,
   },
-  props: ["userData"],
+  props: ["userData", "avatars"],
   data() {
     return {
       user: this.userData,

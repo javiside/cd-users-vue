@@ -1,7 +1,8 @@
 export default (url) => {
   return fetch(url)
-    .then((res) => {
+    .then(async (res) => {
       if (res.ok) {
+        // await (() => new Promise((r) => setTimeout(() => r(1), 3000)))();
         return res.json();
       } else {
         throw Error(

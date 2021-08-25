@@ -1,5 +1,5 @@
 <template>
-  <app-header :user-name="userName" />
+  <app-header />
   <router-view />
 </template>
 
@@ -9,21 +9,6 @@ import Header from "./components/TheHeader.vue";
 export default {
   components: {
     "app-header": Header,
-  },
-  data() {
-    return { userName: null };
-  },
-  created() {
-    this.emitter.on("set-user-name", (userName) => {
-      this.userName = userName;
-    });
-  },
-  watch: {
-    "$route.params.id"(userId) {
-      if (!userId) {
-        this.userName = null;
-      }
-    },
   },
 };
 </script>
