@@ -5,10 +5,4 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store/index";
 
-const app = createApp(App);
-
-app.use(router);
-app.use(store);
-app.use(Alert);
-app.use(Skeleton);
-app.mount("#app");
+createApp(App).use(router).use(store).use(Alert).use(Skeleton).mount("#app");

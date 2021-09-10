@@ -1,10 +1,10 @@
 <template>
-  <a-skeleton :loading="this.loading" active :paragraph="{ rows: 10 }">
+  <a-skeleton :loading="this.loadingUsers" active :paragraph="{ rows: 10 }">
     <a-alert
-      v-if="this.error"
+      v-if="this.usersError"
       message="Error"
       type="error"
-      :description="this.error"
+      :description="this.usersError"
       show-icon
     />
     <transition-group tag="ul" v-else class="user-list" name="user-list">
@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import BaseUser from "../components/BaseUser.vue";
 
 export default {
@@ -26,18 +27,7 @@ export default {
     BaseUser,
   },
   computed: {
-    users() {
-      return this.$store.getters.users;
-    },
-    avatars() {
-      return this.$store.getters.avatars;
-    },
-    error() {
-      return this.$store.getters.usersError;
-    },
-    loading() {
-      return this.$store.getters.loadingUsers;
-    },
+    ...mapGetters(["users", "avatars", "usersError", "loadingUsers"]),
   },
   created() {
     this.$store.dispatch("fetchUsers");
